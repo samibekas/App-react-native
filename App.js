@@ -1,14 +1,10 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- * @flow
- * @lint-ignore-every XPLATJSCOPYRIGHT1
- */
-
 import React, {Component} from 'react';
-import {Platform, StyleSheet, Text, View, TextInput, Button} from 'react-native';
+import {Platform, StyleSheet, View } from 'react-native';
+import PlaceInput from './src/components/PlaceInput/PlaceInput'
+import PlaceList from './src/components/PlaceList/PlaceList'
+import PlaceDetail from './src/components/PlaceDetail/PlaceDetail'
+import placeImage from './src/assets/paris.jpg'
+
 
 const instructions = Platform.select({
   ios: 'Press Cmd+R to reload,\n' + 'Cmd+D or shake for dev menu',
@@ -21,51 +17,65 @@ const instructions = Platform.select({
 export default class App extends Component {
 
   state = {
-    placeName: '',
-    places: []
+    places: [],
+    selectedPlace: null
   }
 
-  placeNameChangedHandler = (val) => {
-    this.setState({
-      placeName: val
-    })
-  }
-
-  placeSubmitHandler = () => {
-    if (this.state.placeName.trim() === "") {
-      return
-    }
+  placeAddedHandler = placeName => {
     this.setState(prevState => {
       return {
-        places: prevState.places.concat(prevState.placeName)
+        places: prevState.places.concat({
+          key: Math.random(),
+          name: placeName,
+          image: {
+            uri: "https://pvtistes.net/wp-content/uploads/2012/09/Osaka-vu-de-nuit-800x529.jpg"
+          }
+        })
       }
     })
   }
 
+  placeSelectedHandler = key => {
+    this.setState(prevState => {
+      return {
+        selectedPlace: prevState.places.find(place => {
+          return place.key === key
+        })
+      }
+    })
+
+  }
+
+  placeDeletedHandler = () => {
+    this.setState(prevState => {
+      return {
+        places: prevState.places.filter((place) => {
+          return place.key !== prevState.selectedPlace.key
+        }),
+        selectedPlace: null
+      }
+    })
+  }
+
+  modalClosedHandler = () => {
+    this.setState({
+      selectedPlace: null
+    })
+  }
+
   render() {
-
-    const placesOutput = this.state.places.map((place, i) => (
-      <Text key={i}>{place}</Text>
-    ))
-
     return (
       <View style={styles.container}>
-        <View style={styles.inputContainer}>
-          <TextInput
-            style={styles.placeInput}
-            value={this.state.placeName}
-            placeholder="An awesome place"
-            onChangeText={this.placeNameChangedHandler}
-          />
-          <Button
-            style={styles.placeButton}
-            title="Add"
-            onPress={this.placeSubmitHandler}
-          />
-        </View>
-        <View>
-          {placesOutput}
-        </View>
+        <PlaceDetail
+          selectedPlace={this.state.selectedPlace}
+          onItemDeleted={this.placeDeletedHandler}
+          onModalClosed={this.modalClosedHandler}
+        />
+        <PlaceInput onPlaceAdded={this.placeAddedHandler} />
+        <PlaceList
+          places={this.state.places}
+          onItemSelected={this.placeSelectedHandler}
+        />
       </View>
     );
   }
@@ -78,18 +88,6 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-start',
     alignItems: 'center',
     backgroundColor: '#F5FCFF',
-  },
-  inputContainer: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    width: '100%'
-  },
-  placeInput: {
-    width: '70%'
-  },
-  placeButton: {
-    width: '30%'
   },
   welcome: {
     fontSize: 20,
