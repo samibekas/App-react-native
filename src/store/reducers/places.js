@@ -1,12 +1,14 @@
-import { ADD_PLACE, DELETE_PLACE } from '../actions/actionTypes'
+import {
+  ADD_PLACE,
+  DELETE_PLACE
+} from "../actions/actionTypes";
 
 const initialState = {
   places: []
-}
+};
 
 const reducer = (state = initialState, action) => {
-  switch(action.type) {
-
+  switch (action.type) {
     case ADD_PLACE:
       return {
         ...state,
@@ -14,20 +16,21 @@ const reducer = (state = initialState, action) => {
           key: Math.random(),
           name: action.placeName,
           image: {
-            uri: "https://pvtistes.net/wp-content/uploads/2012/09/Osaka-vu-de-nuit-800x529.jpg"
+            uri:
+              "https://c1.staticflickr.com/5/4096/4744241983_34023bf303_b.jpg"
           }
         })
-      }
+      };
     case DELETE_PLACE:
       return {
         ...state,
-        places: state.places.filter((place) => {
-          return place.key !== action.placeKey
+        places: state.places.filter(place => {
+          return place.key !== action.placeKey;
         })
-      }
+      };
     default:
-      return state
+      return state;
   }
-}
+};
 
-export default reducer
+export default reducer;
