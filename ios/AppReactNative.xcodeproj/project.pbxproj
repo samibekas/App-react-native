@@ -39,7 +39,6 @@
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
 		ADBDB9381DFEBF1600ED6528 /* libRCTBlob.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ADBDB9271DFEBF0700ED6528 /* libRCTBlob.a */; };
 		AE012D14222D847A001B4648 /* libReactNativeNavigation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AE012D12222D8443001B4648 /* libReactNativeNavigation.a */; };
-		AE671D6C222D70EB0017608D /* main.jsbundle in Resources */ = {isa = PBXBuildFile; fileRef = 008F07F21AC5B25A0029DE68 /* main.jsbundle */; };
 		AE761352222C5213000D038F /* libRNVectorIcons.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AE76134F222C51E5000D038F /* libRNVectorIcons.a */; };
 		AE761354222C52C1000D038F /* Ionicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = AE761353222C52C1000D038F /* Ionicons.ttf */; };
 		ED297163215061F000B7C4FE /* JavaScriptCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED297162215061F000B7C4FE /* JavaScriptCore.framework */; };
@@ -1125,7 +1124,6 @@
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,
 				AE761354222C52C1000D038F /* Ionicons.ttf in Resources */,
-				AE671D6C222D70EB0017608D /* main.jsbundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
